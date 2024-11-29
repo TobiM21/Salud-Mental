@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #85C7F2 0%, #DBDBDB 50%, #636363 100%);
+}
+
+form {
+    width: 380px;
+    height: auto;
+    min-height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    gap: 15px;
+}
+
+.user-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-weight: 500;
+    color: #636363;
+    font-size: 0.95rem;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #DBDBDB;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #85C7F2;
+}
+
+.box-visible {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.box-visible label {
+    color: #636363;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.box-visible input[type="checkbox"] {
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #85C7F2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+button:hover:not(:disabled) {
+    background-color: #6ab0e0;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background-color: #DBDBDB;
+    cursor: not-allowed;
+}

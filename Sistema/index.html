@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGP - Gestión de Pacientes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #D1D1D1;
+            color: #4C4C4C;
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(76, 76, 76, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            color: #85C7F2;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover .logo-img {
+            transform: scale(1.05);
+        }
+        
+        nav {
+            margin-left: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+        
+        nav ul li a {
+            color: #636363;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+        }
+        
+        nav ul li a:hover {
+            color: #85C7F2;
+        }
+        
+        .login-btn {
+            background-color: #85C7F2;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(133, 199, 242, 0.3);
+        }
+
+        .main-content {
+            margin-top: 90px;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: url('fondo2.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .hero-text {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(76, 76, 76, 0.1);
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            color: #4C4C4C;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #636363;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        .card-section {
+            background-color: #DBDBDB;
+            padding: 80px 20px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(76, 76, 76, 0.05);
+            width: 30%;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #4C4C4C;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #636363;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #85C7F2;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(133, 199, 242, 0.3);
+        }
+
+        .footer {
+            background-color: #DBDBDB;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #D1D1D1;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .footer-left {
+            color: #4C4C4C;
+            font-size: 0.9rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-nav a {
+            color: #636363;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: #85C7F2;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #636363;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #85C7F2;
+        }
+
+        @media (max-width: 768px) {
+            /* Los media queries se mantienen igual */
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav {
+                margin-left: 0;
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .hero-section {
+                min-height: 500px;
+            }
+            
+            .hero-text {
+                padding: 30px;
+                margin: 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- El resto del HTML se mantiene igual -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo SGP" class="logo-img">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="http://localhost:3000/Fran%20y%20Tobi2/nueva_historia.php">Pacientes</a></li>
+                    <li><a href="http://localhost:3000/Fran%20y%20Tobi2/gestionar_turnos.php">Turnos</a></li>
+                    <li><a href="http://localhost:3000/Fran%20y%20Tobi/historia_clinica.html">Historial Clínico</a></li>
+                </ul>
+            </nav>
+            <button class="login-btn" onclick="window.open('login.html', '_blank')">Acceder</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-background"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sistema de Gestión de Pacientes</h1>
+                    <p>Gestiona de manera eficiente la información de tus pacientes, turnos y reportes médicos en una única plataforma integrada.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card-section">
+            <div class="cards-container">
+                <div class="card">
+                    <img src="card.webp" alt="Gestión de Pacientes">
+                    <div class="card-content">
+                        <h3>Gestión de Pacientes</h3>
+                        <p>Información completa sobre los pacientes para su seguimiento.</p>
+                        <!-- Cambia esta línea -->
+                        <a href="busqueda.php">Abrir</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="card2.jpg" alt="Control de Pacientes">
+                    <div class="card-content">
+                        <h3>Control de Pacientes</h3>
+                        <p>Acceso y modificación de información de pacientes.</p>
+                        <a href="formulario_paciente.php">Abrir</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="card3.webp" alt="Reportes">
+                    <div class="card-content">
+                        <h3>Reportes</h3>
+                        <p>Consulta de los reportes.</p>
+                        <a href="http://localhost:3000/Fran%20y%20Tobi/reportes/reportes.php">Abrir</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                ©2024 SGP - Sistema de Gestión de Pacientes
+            </div>
+            <nav class="footer-nav">
+                <a href="#">Inicio</a>
+                <a href="#">Ayuda</a>
+                <a href="#">Contacto</a>
+            </nav>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
